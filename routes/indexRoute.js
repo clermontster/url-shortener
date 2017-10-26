@@ -14,7 +14,7 @@ indexRoute.get('/:key', function(req, res) {
 	const key = req.params.key;
 	mongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('index route error', err, process.env);
+			console.log('index route error', process.env,err);
 			throw err;
 		}
 		const urls = db.collection('urls');
