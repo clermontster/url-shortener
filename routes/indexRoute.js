@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
 // const url = 'mongodb://localhost:27017/url-shortener';	
-const url = process.env.MONGOLAB_URI;
+const url = process.env.PROD_MONGODB;
 
 const indexRoute = express.Router();
 
@@ -14,7 +14,7 @@ indexRoute.get('/:key', function(req, res) {
 	const key = req.params.key;
 	mongoClient.connect(url, (err, db) => {
 		if (err) {
-			console.log('index route error', err);
+			console.log('index route error', err, process.env);
 			throw err;
 		}
 		const urls = db.collection('urls');
