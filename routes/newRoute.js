@@ -11,8 +11,10 @@ newRoute.get('/:url(*)', function(req, res) {
 	const shortId = shortid.generate();
 	if (validUrl.isUri(urlToShorten)) {
 		mongoClient.connect(url, (err, db) => {
-			if (err) throw err;
-
+			if (err) {	
+				console.log('index route error', err);
+				throw err;
+			}
 			const urls = db.collection('urls');
 			urls.insertOne({ url: urlToShorten, shortId: shortId }, (err, r) => {
 				if (err) throw err;

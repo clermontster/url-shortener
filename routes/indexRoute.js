@@ -12,7 +12,10 @@ indexRoute.get('/favicon.ico', function(req, res) {
 indexRoute.get('/:key', function(req, res) {
 	const key = req.params.key;
 	mongoClient.connect(url, (err, db) => {
-		if (err) throw err;
+		if (err) {
+			console.log('index route error', err);
+			throw err;
+		}
 		const urls = db.collection('urls');
 		urls.find({shortId: key}).toArray((err, docs) => { 
 			if (err) throw err;
