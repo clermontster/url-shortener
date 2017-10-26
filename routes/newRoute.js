@@ -4,7 +4,8 @@ const newRoute = express.Router();
 const mongoClient = require('mongodb').MongoClient;
 const shortid = require('shortid');
 const validUrl = require('valid-url');
-const url = 'mongodb://localhost:27017/url-shortener';	
+// const url = 'mongodb://localhost:27017/url-shortener';	
+const url = process.env.PROD_MONGODB;
 
 newRoute.get('/:url(*)', function(req, res) {
 	const urlToShorten = req.params.url;
